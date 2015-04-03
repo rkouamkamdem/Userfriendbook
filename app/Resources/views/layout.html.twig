@@ -1,0 +1,87 @@
+{# app/Resources/views/layout.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome sur le site multi - utilisateur !!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }} " />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.css') }} " />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }} " />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }} " />
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Carnet d'amis mutli-utilisateurs</a>
+
+        </div>
+    </div>
+</div>
+
+
+{% block body %}
+
+{% block layout_user %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        Connecté en tant que {{ app.user.username }} - <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+    {% endif %}
+{% endblock layout_user %}
+
+{% endblock %}
+
+<hr />
+
+<footer id="footer" class="vspace20">
+    <div class="container">
+        <div class="row">
+            <div class="span4 offset1">
+                <h4>Informations</h4>
+                <ul class="nav nav-stacked">
+                    <li><a href="#">CGV</a>
+                    <li><a href="#">Mentions légales</a>
+                </ul>
+            </div>
+
+            <div class="span4">
+                <h4>Mes Coordonnées</h4>
+                <p><i class="icon-map-marker"></i>&nbsp; Plaisir 78370 - 81 Rue jean mermoz</p>
+            </div>
+
+            <div class="span2">
+                <h4>Me contacter</h4>
+                <p><i class="icon-phone"></i>&nbsp;Tel: 06 76 21 40 14</p>
+                <p><i class="icon-print"></i>&nbsp;Fax: 02 35 00 00 00</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span4">
+                <p>&copy; Copyright 2015 - Kouam Roméo</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ asset('js/jquery-1.10.0.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+{# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{% block javascripts %}
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+services:
+#    friendbook.example:
+#        class: FriendbookBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

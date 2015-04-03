@@ -1,0 +1,83 @@
+<?php
+
+namespace FriendbookBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Friends
+ *
+ * @ORM\Table(name="friends")
+ * @ORM\Entity(repositoryClass="FriendbookBundle\Entity\FriendsRepository")
+ */
+class Friends
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="FriendbookBundle\Entity\Users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iduser1", type="string", length=100,unique=true)
+     * @ORM\Id
+     *
+     */
+    private $iduser1;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iduser2", type="string", length=100,unique=true)
+     * @ORM\Id
+     *
+     */
+    private $iduser2;
+
+    /**
+     * Set iduser1
+     *
+     * @param string $iduser1
+     * @return Friends
+     */
+    public function setIduser1($iduser1)
+    {
+        $this->iduser1 = $iduser1;
+
+        return $this;
+    }
+
+    /**
+     * Get iduser1
+     *
+     * @return string 
+     */
+    public function getIduser1()
+    {
+        return $this->iduser1;
+    }
+
+    /**
+     * Set iduser2
+     *
+     * @param string $iduser2
+     * @return Friends
+     */
+    public function setIduser2($iduser2)
+    {
+        $this->iduser2 = $iduser2;
+
+        return $this;
+    }
+
+    /**
+     * Get iduser2
+     *
+     * @return string 
+     */
+    public function getIduser2()
+    {
+        return $this->iduser2;
+    }
+}

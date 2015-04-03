@@ -1,0 +1,40 @@
+{% extends "::layout.html.twig" %}
+
+{% block body %}
+    {# {{ name }}! {{ id }}  #}
+    {# On n'affiche le lien « Ajouter une annonce » qu'aux auteurs
+                            (et admins, qui héritent du rôle auteur)
+                            {% if is_granted('ROLE_AUTEUR') %}
+                                <li><a href="{{ path('oc_platform_add') }}">Ajouter une annonce</a></li>
+                            {% endif %}
+                            #}
+
+    <div class="container">
+        <div class="row" >
+            <div class="span3">
+                <b>Partie gauche à l'intérieur de la div container avec 3 colonnes </b>
+            </div>
+            <div class="span6">
+                <form action="Afficher.php">
+                    <fieldset>
+                        <legend>Bonjour, Bienvenue dans l'écran d'ajout !!! d'un utilisateur d'identifiant : </legend>
+                        <pre>
+                        <label>Nom</label> <input type="text" name="nom" value="" />
+                        <label>Prenom</label> <input type="text" name="prenom" value="" />
+                        <label>Mail</label> <input type="text" name="mail1" value="" />
+                        <label>Adresse</label> <textarea name="adresse" ></textarea>
+                        <label>Code Postal</label> <input type="text" name="cp" value="" />
+                        <label>Téléphone</label> <input type="text" name="telephone" value="" />
+                        <label>Site Web</label> <input type="text" name="sitew" value="" />
+                            <button class="btn btn-primary">Ajouter à mon carnet</button>
+                        </pre>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="span3">
+                <b>Partie droite à l'intérieur de la div container avec 3 colonnes </b>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "::layout.html.twig" %}
+{% block body %}
+    Bonjour Romeo Bienvenue à ta page d'accueil !!! {# {{ name }}! #}
+
+    {#
+    <table border="1">
+    {% for utilisateurs in users %}
+        <tr>
+            <td>{{ utilisateurs.username }}</td>
+            <td>{{ utilisateurs.nom }}</td>
+            <td>{{ utilisateurs.prenom }}</td>
+            <td>{{ utilisateurs.email }}</td>
+            <td>{{ utilisateurs.enabled }}</td>
+        </tr>
+
+    {% endfor %}
+    </table>
+    <a href="{{ path('annonce_view', {'id': advert.id}) }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Retour à l'annonce
+    </a>
+    #}
+    <div class="container">
+        <div class="row" >
+            <div class="span2">
+                <b>Partie gauche à l'intérieur de la div container avec 3 colonnes </b>
+            </div>
+            <div class="span8">
+                <p>
+                <ul>
+                    {% for utilisateurs in users %}
+                        <li>Id : {{ utilisateurs.id }} Nom : {{ utilisateurs.nom }} Prenom : {{ utilisateurs.prenom }} Mail : {{ utilisateurs.email }} <a href="{{ path('friendbook_afficher', {'id': utilisateurs.id}) }}"><i class="icon-refresh"></i></a>
+                            <a href="{{ path('friendbook_supprimer', {'id': utilisateurs.id}) }}"><i class="icon-trash"></i></a></li>
+                    {% endfor %}
+                </ul>
+                </p>
+
+            </div>
+            <div class="span2">
+                <b>Partie drioite à l'intérieur de la div container avec 3 colonnes </b>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

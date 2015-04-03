@@ -1,0 +1,23 @@
+friendbook_homepage:
+    path:     /accueil
+    defaults: { _controller: FriendbookBundle:Default:index }
+
+friendbook_ajout:
+    path:     /ajout
+    defaults: { _controller: FriendbookBundle:Friendbook:ajout }
+
+friendbook_afficher:
+    path:     /afficher/{id}
+    defaults: { _controller: FriendbookBundle:Friendbook:afficher }
+
+friendbook_modifier:
+    path:     /modifier/{iduser}
+    defaults: { _controller: FriendbookBundle:Friendbook:modifier }
+
+friendbook_lister:
+    path:     /lister/{iduser}
+    defaults: { _controller: FriendbookBundle:Friendbook:lister }
+
+friendbook_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: FriendbookBundle:Friendbook:supprimer }

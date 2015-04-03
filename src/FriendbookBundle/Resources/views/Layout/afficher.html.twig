@@ -1,0 +1,39 @@
+{% extends "::layout.html.twig" %}
+
+{% block body %}
+     {# {{ name }}! #}
+
+    <div class="container">
+        <div class="row" >
+            <div class="span3">
+                <b>Partie gauche à l'intérieur de la div container avec 3 colonnes </b>
+            </div>
+            <div class="span6">
+                <p>
+                <form action="{{ path('friendbook_modifier',{'iduser': users.id}) }}">
+                    <fieldset>
+                        <legend>Bonjour, Bienvenue je suis sur l'écran d'affichage d'un utilisateur d'identifiant : </legend>
+                        <pre>
+                            <label>Identifiant : [{{ users.id }}] </label>
+                        <label>Nom</label> <input type="text" name="nom" value="{{ users.nom }}" />
+                        <label>Prenom</label> <input type="text" name="prenom" value="{{ users.prenom }}" />
+                        <label>Mail1</label> <input type="text" name="mail1" value="{{ users.email }}" />
+
+                        <label>Adresse</label> <textarea name="adresse" > {{ users.adresse }}</textarea>
+                        <label>Code Postal</label> <input type="text" name="cp" value="{{ users.cp }}" />
+                        <label>Téléphone</label> <input type="text" name="telephone" value="{{ users.telephone }}" />
+                        <label>Site Web</label> <input type="text" name="sitew" value="{{ users.siteWeb }}" />
+                            <a href="{{ path('friendbook_homepage') }}" class="btn btn-success">Retour à l'accueil</a>  <button class="btn btn-primary">Enregister les modifications</button>
+                        </pre>
+                    </fieldset>
+                </form>
+                </p>
+
+            </div>
+            <div class="span3">
+                <b>Partie drioite à l'intérieur de la div container avec 3 colonnes </b>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        UserBundle\Entity\User: sha512
+        #FOS\UserBundle\Model\UserInterface: sha512
+        #Encodeur sans FOSUser comente par rko le 24/03/2015 Symfony\Component\Security\Core\User\User: plaintext
+        #Encodeur sans FOSUser comente par rko le 24/03/2015 UserBundle\Entity\User: plaintext
+
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER, ROLE_MODERATEUR]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    #Commenté par RKO le 23/03/2014 : ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    #Commenté par RKO le 23/03/2014 :providers:
+        #Commenté par RKO le 23/03/2014 :in_memory:
+            #Commenté par RKO le 23/03/2014 :memory:
+                #Commenté par RKO le 23/03/2014 :users:
+                    #Commenté par RKO le 23/03/2014 :user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    #Commenté par RKO le 23/03/2014 :admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+    providers:
+        #Encodeur de FOSUser à remettre comente par rko le 24/03/2015 : fos_userbundle:
+            #Encodeur de FOSUser à remettre comente par rko le 24/03/2015 : id: fos_user.user_provider.username
+        main:
+          id: fos_user.user_provider.username
+          #Ancien provider sans FOSUserBundle :entity: { class: UserBundle\Entity\User, property: username }
+    # the main part of the security, where you can set up firewalls
+    # for specific sections of your app
+    firewalls:
+        main:
+             pattern:   ^/
+             anonymous: true
+             provider:  main
+
+             #Commenté par RKO le 23/03/2014 :ce provider 'in_memory' à l'origine etait à la place du 'fos_userbundle' ci dessus
+             form_login:
+                 login_path:  fos_user_security_login
+                 check_path:  fos_user_security_check
+
+             logout:
+                 path:        fos_user_security_logout
+                 target:      /login #Je reviens à l'acceuil(accueil) ou au login(login) lorsque je me déconnecte.
+             remember_me:
+                    key:      %secret% # %secret% est un paramètre de parameters.yml
+#Debut commentaire RKO le 22/03/2015        # the login page has to be accessible for everybody //fos_user_security_check
+        #demo_login:
+            #pattern:  ^/demo/secured/login$
+            #security: false
+
+        # secures part of the application
+        #demo_secured_area:
+            #pattern:    ^/demo/secured/
+            # it's important to notice that in this case _demo_security_check and _demo_login
+            # are route names and that they are specified in the AcmeDemoBundle
+            #form_login:
+                #check_path: _demo_security_check
+                #login_path: _demo_login
+            #logout:
+                #path:   _demo_logout
+                #target: _demo
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+#Fin commentaire RKO le 22/03/2015
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/cookbook/security/access_control.html
+    #Debut commentaire RKO le 22/03/2015access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+    access_control:
+           - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: ^/admin/, role: ROLE_ADMIN }
